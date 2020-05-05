@@ -43,5 +43,10 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function commandes()
+
+    {
+        return $this->belongsToMany(Commande::class, 'user_has_commande');
+    }
   
 }

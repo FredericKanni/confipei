@@ -16,7 +16,7 @@ class CreateConfituresTable extends Migration
         Schema::create('confitures', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-          
+            $table->bigInteger('stock');
         
         });
     }
