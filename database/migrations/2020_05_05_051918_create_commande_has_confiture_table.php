@@ -16,6 +16,8 @@ class CreateCommandeHasConfitureTable extends Migration
         Schema::create('commande_has_confiture', function (Blueprint $table) {
             $table->bigInteger('id_commande')->unsigned();
             $table->bigInteger('id_confiture')->unsigned();
+            $table->bigInteger('quantité')->unsigned();
+
 
             $table->foreign('id_commande')->references('id')->on('commandes');
             $table->foreign('id_confiture')->references('id')->on('confitures');
