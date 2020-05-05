@@ -10,6 +10,8 @@ class Commande extends Model
     protected $fillable = ['id'];
 
 
+    public $timestamps = false;
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_has_commande');
