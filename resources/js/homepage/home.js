@@ -1,7 +1,9 @@
 import Vue from 'vue';
+import Vuetify from 'vuetify';
 import Routes from './routes.js';
 import Layout from './components/layouts/Layout';
 import Home from '.././homepage/components/views/ExampleComponent';
+import 'vuetify/dist/vuetify.min.css';
 
 /**
 Vue.component('example-component', require('.././homepage/components/views/ExampleComponent').default);
@@ -12,9 +14,14 @@ Vue.component('example-component', require('.././homepage/components/views/Examp
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.use(Vuetify);
+
+
 const app = new Vue({
     el: '#app',
-
+    vuetify: new Vuetify({}),
     router: Routes,
     components: { Layout }
 });
+
+export default new Vuetify(home);
