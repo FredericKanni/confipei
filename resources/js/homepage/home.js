@@ -24,4 +24,4 @@ const app = new Vue({
     components: { Layout }
 });
 
-export default new Vuetify(home);
+export default new Vuetify(app);
