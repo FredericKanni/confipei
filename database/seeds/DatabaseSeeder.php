@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RecompenseTableSeeder::class);
 
         $this->call(ConfitureTableSeeder::class);
+
+        
     }
 }

@@ -13,6 +13,8 @@ class Recompense extends Model
 
      public function confitures()
     {
-        return $this->belongsToMany(Confiture::class, 'confiture_has_recompense');
+        return $this->belongsToMany(Confiture::class, 'confiture_has_recompense','id_confiture', 'id_recompense');
+
+        
     }
 }

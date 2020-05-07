@@ -14,6 +14,6 @@ class Fruit extends Model
 
     public function confitures()
     {
-        return $this->belongsToMany(Confiture::class, 'confiture_has_fruit');
+        return $this->belongsToMany(Confiture::class, 'confiture_has_fruit','id_confiture', 'id_fruit');
     }
 }

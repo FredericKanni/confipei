@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Commande extends Model
 {
-    protected $table = 'commande';
+    protected $table = 'commandes';
     protected $fillable = ['id'];
 
 
@@ -14,12 +14,12 @@ class Commande extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_has_commande');
+        return $this->belongsToMany(User::class, 'user_has_commande','id_user'  ,'id_commande');
     }
 
     public function confiture()
     {
-        return $this->belongsToMany(Confiture::class, 'commande_has_confiture');
+        return $this->belongsToMany(Confiture::class, 'commande_has_confiture','id_confiture'  ,'id_commande');
     }
 
    
