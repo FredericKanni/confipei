@@ -17,6 +17,7 @@ export default {
       //cest ici qu il faut changer les donne
       {
         text: "confitures",
+        
         align: "start",
         sortable: false,
         value: "name"
