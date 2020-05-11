@@ -2029,6 +2029,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2045,45 +2046,19 @@ __webpack_require__.r(__webpack_exports__);
         value: "prix"
       }, {
         text: "fruits",
-        value: "fruits.name"
+        value: "fruits"
       }, {
         text: "producteur",
         value: "producteur.name"
       }, {
         text: "recompenses",
-        value: "recompenses.name"
+        value: "recompenses"
       }, {
         text: "Actions",
         value: "actions",
         sortable: false
-      }],
-      desserts: [],
-      editedIndex: -1,
-      editedItem: {
-        name: "",
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
-      },
-      defaultItem: {
-        name: "",
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
-      }
+      }]
     };
-  },
-  computed: {
-    formTitle: function formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
-    }
-  },
-  watch: {
-    dialog: function dialog(val) {
-      val || this.close();
-    }
   },
   created: function created() {
     this.initialize();
@@ -2106,41 +2081,20 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(error);
       });
     },
-    initialize: function initialize() {
-      this.desserts = [{
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        carbs: 24,
-        protein: 4.0
-      }];
-    },
-    editItem: function editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
-    },
-    deleteItem: function deleteItem(item) {
-      var index = this.desserts.indexOf(item);
-      confirm("Are you sure you want to delete this item?") && this.desserts.splice(index, 1);
-    },
-    close: function close() {
-      var _this2 = this;
-
-      this.dialog = false;
-      this.$nextTick(function () {
-        _this2.editedItem = Object.assign({}, _this2.defaultItem);
-        _this2.editedIndex = -1;
+    initialize: function initialize() {},
+    displayFruits: function displayFruits(items) {
+      var fruits = [];
+      items.forEach(function (item) {
+        fruits.push(item.name);
       });
+      return fruits.join(', ');
     },
-    save: function save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
-      } else {
-        this.desserts.push(this.editedItem);
-      }
-
-      this.close();
+    displayRecompenses: function displayRecompenses(items) {
+      var recompenses = [];
+      items.forEach(function (item) {
+        recompenses.push(item.name);
+      });
+      return recompenses.join(', ');
     }
   }
 });
@@ -38585,7 +38539,23 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("v-data-table", {
     staticClass: "elevation-1",
-    attrs: { headers: _vm.headers, items: _vm.confitures }
+    attrs: { headers: _vm.headers, items: _vm.confitures },
+    scopedSlots: _vm._u([
+      {
+        key: "item.fruits",
+        fn: function(ref) {
+          var item = ref.item
+          return [_vm._v(_vm._s(_vm.displayFruits(item.fruits)))]
+        }
+      },
+      {
+        key: "item.recompenses",
+        fn: function(ref) {
+          var item = ref.item
+          return [_vm._v(_vm._s(_vm.displayRecompenses(item.recompenses)))]
+        }
+      }
+    ])
   })
 }
 var staticRenderFns = []

@@ -1,6 +1,7 @@
 <template>
   <v-data-table :headers="headers" :items="confitures"  class="elevation-1">
-
+ <template v-slot:item.fruits="{ item }">{{displayFruits(item.fruits)}}</template>
+      <template v-slot:item.recompenses="{ item }">{{displayRecompenses(item.recompenses)}}</template>
   
   </v-data-table>
 </template>
@@ -26,40 +27,18 @@ export default {
         text: "prix",
         value: "prix"
       },
-      { text: "fruits", value: "fruits.name" },
+      { text: "fruits", value: "fruits" },
       { text: "producteur", value: "producteur.name" },
-      { text: "recompenses", value: "recompenses.name" },
+      { text: "recompenses", value: "recompenses" },
       { text: "Actions", value: "actions", sortable: false }
     ],
-    desserts: [],
-    editedIndex: -1,
-    editedItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
-    },
-    defaultItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
-    }
+ 
+    
   }),
 
-  computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
-    }
-  },
 
-  watch: {
-    dialog(val) {
-      val || this.close();
-    }
-  },
+
+ 
 
   created() {
     this.initialize();
@@ -85,46 +64,33 @@ export default {
     },
 
     initialize() {
-      this.desserts = [
-        {
-          name: "Frozen Yogurt",
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0
+    
+    },
+
+
+      displayFruits(items){
+            var fruits=[];
+            items.forEach(item=>{
+                fruits.push((item.name))
+            })
+            return fruits.join(', ');
         },
-      
-      ];
-    },
 
-    editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
-    },
+        displayRecompenses(items){
+            var recompenses=[];
+            items.forEach(item=>{
+                recompenses.push((item.name))
+            })
+            return recompenses.join(', ');
+        }
 
-    deleteItem(item) {
-      const index = this.desserts.indexOf(item);
-      confirm("Are you sure you want to delete this item?") &&
-        this.desserts.splice(index, 1);
-    },
+   
 
-    close() {
-      this.dialog = false;
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      });
-    },
+   
 
-    save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
-      } else {
-        this.desserts.push(this.editedItem);
-      }
-      this.close();
-    }
+  
+
+   
   }
 };
 </script>
